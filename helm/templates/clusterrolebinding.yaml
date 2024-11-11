@@ -1,0 +1,16 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: oetp-controller-rolebinding
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{ template "oetp.common-labels" . }}
+subjects:
+  - kind: ServiceAccount
+    name: oetp-controller
+    namespace: {{ $.Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: oetp-controller-role
+  apiGroup: rbac.authorization.k8s.io

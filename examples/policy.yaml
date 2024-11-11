@@ -1,0 +1,13 @@
+---
+apiVersion: ticq.dev/v1alpha1
+kind: EgressPolicy
+metadata:
+  name: example
+  namespace: default
+spec:
+  egress:
+    - dnsName: middle.ticq.dev
+      type: Allow
+  groups:
+    - "systema"
+    - "doesnotexist"

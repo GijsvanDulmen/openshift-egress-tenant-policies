@@ -1,0 +1,79 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: egressbases.ticq.dev
+spec:
+  group: ticq.dev
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required: ["after", "before"]
+              properties:
+                before:
+                  type: array
+                  items:
+                    type: object
+                    required: ["type"]
+                    oneOf:
+                      - required: ["dnsName"]
+                      - required: ["cidr"]
+                    properties:
+                      type:
+                        type: string
+                        enum: ["Allow", "Deny"]
+                      dnsName:
+                        type: string
+                      cidr:
+                        type: string
+                after:
+                  type: array
+                  items:
+                    type: object
+                    required: ["type"]
+                    oneOf:
+                      - required: [ "dnsName" ]
+                      - required: [ "cidr" ]
+                    properties:
+                      type:
+                        type: string
+                        enum: [ "Allow", "Deny" ]
+                      dnsName:
+                        type: string
+                      cidr:
+                        type: string
+                groups:
+                  type: array
+                  items:
+                    type: object
+                    required: ["name"]
+                    properties:
+                      name:
+                        type: string
+                      egress:
+                        type: array
+                        items:
+                          type: object
+                          required: [ "type" ]
+                          oneOf:
+                            - required: [ "dnsName" ]
+                            - required: [ "cidr" ]
+                          properties:
+                            type:
+                              type: string
+                              enum: [ "Allow", "Deny" ]
+                            dnsName:
+                              type: string
+                            cidr:
+                              type: string
+
+  names:
+    kind: EgressBase
+    plural: egressbases
+  scope: Namespaced

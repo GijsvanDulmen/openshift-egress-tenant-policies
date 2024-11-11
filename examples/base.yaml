@@ -1,0 +1,20 @@
+---
+apiVersion: ticq.dev/v1alpha1
+kind: EgressBase
+metadata:
+  name: example
+  namespace: default
+spec:
+  after:
+    - type: Allow
+      dnsName: after.ticq.dev
+  before:
+    - type: Allow
+      dnsName: before.ticq.dev
+  groups:
+    - name: "systema"
+      egress:
+        - type: Allow
+          dnsName: "a.systema.ticq.dev"
+        - type: Allow
+          dnsName: "b.systema.ticq.dev"

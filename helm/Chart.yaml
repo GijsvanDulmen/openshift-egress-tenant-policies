@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: 1.0.0
+name: openshift-egress-tenant-policies
+description: openshift egress tenant policies controller
+version: 1.0.0
+type: application
